@@ -29,7 +29,7 @@ public class HomeController {
                 <body>
                     <h1>健康管理アプリ</h1>
                     It works!<br>
-                    現在の時刻は%ｓです。
+                    現在の時刻は%sです。
                 </body>
             </html>
             """.formatted(LocalDateTime.now());
