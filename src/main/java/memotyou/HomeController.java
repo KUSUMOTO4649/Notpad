@@ -1,4 +1,4 @@
-package kenkanapuri.unndou;
+package memotyou;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,14 +20,14 @@ public class HomeController {
     private List<TaskItem> taskItems = new ArrayList<>();
 
 
-    @RequestMapping(value="/健康管理アプリ")
+    @RequestMapping(value="/memotyou")
     @ResponseBody
     String hello(){
         return """
             <html>
-                <head><title>健康管理アプリ</title></head>
+                <head><title>メモ帳</title></head>
                 <body>
-                    <h1>健康管理アプリ</h1>
+                    <h1>メモ帳</h1>
                     It works!<br>
                     現在の時刻は%sです。
                 </body>

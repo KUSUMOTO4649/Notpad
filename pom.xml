@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>kenkanapuri</groupId>
-	<artifactId>unndou</artifactId>
+	<artifactId>Notepad</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>unndou</name>
 	<description>health management app</description>
