@@ -16,37 +16,48 @@ import java.util.stream.Collectors;
 @Controller
 public class HomeController {
 
-    record TaskItem(String id,String task,String deadline,boolean done){}
+    record TaskItem(String id, String task, String deadline, boolean done) {
+    }
+
     private List<TaskItem> taskItems = new ArrayList<>();
 
 
-    @RequestMapping(value="/memotyou")
+    @RequestMapping(value = "/memotyou")
     @ResponseBody
-    String hello(){
+    String hello() {
         return """
-            <html>
-                <head><title>メモ帳</title></head>
-                <body>
-                    <h1>メモ帳</h1>
-                    It works!<br>
-                    現在の時刻は%sです。
-                </body>
-            </html>
-            """.formatted(LocalDateTime.now());
-            }
-            @GetMapping("/restadd")
-    String addItemd(@RequestParam("task")String task,
-                     @RequestParam("deadline") String deadline){
-        String id = UUID.randomUUID().toString().substring(0,8);
-        TaskItem item = new TaskItem(id,task,deadline,false);
+                <html>
+                    <head>
+                    <title>メモ帳</title>
+                    </head>
+                    <body>
+                        <h1>メモ帳</h1>
+                        It works!<br>
+                        現在の時刻は%sです。
+                    </body>
+                </html>
+                """.formatted(LocalDateTime.now());
+    }
+
+    @GetMapping("/restadd")
+    String addItemd(@RequestParam("task") String task,
+                    @RequestParam("deadline") String deadline) {
+        String id = UUID.randomUUID().toString().substring(0, 8);
+        TaskItem item = new TaskItem(id, task, deadline, false);
         taskItems.add(item);
         return "タスクを追加しました。";
     }
+
     @GetMapping("/restlist")
-    String listItems(){
+    String listItems() {
         String result = taskItems.stream()
                 .map(TaskItem::toString)
                 .collect(Collectors.joining(","));
         return result;
+    }
+
+    @GetMapping("/test")
+    public String test() {
+        return "home";
     }
 }

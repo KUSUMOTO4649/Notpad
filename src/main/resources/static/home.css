@@ -1,0 +1,36 @@
+#フォーム全体{
+position:relative;/*位置:相対*/
+max-width:500px;/*最大幅*/
+margin-bottom:200px;/*フォームの下に余白*/
+}
+#検索ボックス内{
+height:100px;/*高さ*/
+padding:0 100px;/*詰め物*/
+position:absolute;/*位置:絶対*/
+left:280;/*左*/
+top:0;/*上*/
+border-radius:25px;/*境界半径*/
+outline:0;/*概要*/
+background:#eee;/*背景*/
+}
+#検索ボタン内{
+height:100px;
+width:50px;/*幅*/
+position:absolute;
+left:20px;
+top:0;
+background:#7fbfff;/*背景*/
+color:#fff;
+border:none;/*境界線:なし*/
+border-radius:0 25px 25px 0;/*境界半径*/
+}
+#虫眼鏡 .fa-search-AI{
+font-size:10px;/*フォントサイズ*/
+position:absolute;
+top:100%;
+left:10%;
+}
+#sbtn4:hover{
+color:#888;
+/*検索ボタンマウスオーバー時のフォントカラー*/
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/home.css">
+</head>
+  <body>
+
+  <form method="POST" action="/test">
+      <select name="Category">
+          <option value=Allcategories>全てのカテゴリー</option>
+          <option value=車>車</option>
+          <option value=庭>庭</option>
+          <option value="OTHER">その他</option>
+      </select>
+      <input type="submit" value="保存">
+      <button onclick="clearMemo()">削除</button>
+  </form>
+  <form id="フォーム全体" action="/zatudan/search" method="get">
+      <input id="検索ボックス内" name="s" type="texta" placeholder="AIで検索をするキーワード又は文章を入力" />
+      <button id="検索ボタン内" type="submit">
+      <i class="虫眼鏡 fa-search-AI"></i></button>
+  </form>
+  <form>
+      <textarea id="memo" rows="90" cols="200"></textarea>-->
+  </form>
+<br>
+<!--<h2>保存したメモ</h2>-->
+<!--<ul id="savedMemos"></ul>-->
+
+<!--<script>-->
+<!--        メモを保存するための関数-->
+<!--        function saveMemo() {-->
+<!--            const memoText = document.getElementById('memo').value;-->
+<!--            if (memoText.trim() !== '') {-->
+<!--                const listItem = document.createElement('li');-->
+<!--                listItem.textContent = memoText;-->
+<!--                document.getElementById('savedMemos').appendChild(listItem);-->
+<!--                document.getElementById('memo').value = '';-->
+<!--            }-->
+<!--        }-->
+
+<!--        メモをクリアするための関数-->
+<!--        function clearMemo() {-->
+<!--            document.getElementById('memo').value = '';-->
+<!--        }-->
+<!--    </script>-->
+
+</body>
+</html>
