@@ -60,4 +60,10 @@ public class HomeController {
     public String test() {
         return "home";
     }
+
+    @GetMapping("/update")
+    String update( @RequestParam("memo") String memo,
+        TaskItem item = new TaskItem(id, task, deadline,memo, done);
+        this.dao.update(item);
+        return "redirect:/list";
 }

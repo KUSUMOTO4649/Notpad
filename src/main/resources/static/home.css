@@ -39,7 +39,7 @@ color:#888;
     width: 1em;
     height: 1em;
     color: #000;
-    font-size:50px;
+    font-size:60px;
 }
 .magnifying_glass::before {
     position: absolute;
