@@ -5,8 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 
-public class NotepadApplicaion {
+public class NotepadApplication {
         public static void main(String[] args) {
-            SpringApplication.run(NotepadApplicaion.class, args);
+            SpringApplication.run(NotepadApplication.class, args);
         }
     }

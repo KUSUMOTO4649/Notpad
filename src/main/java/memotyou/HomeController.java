@@ -1,5 +1,6 @@
 package memotyou;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,10 +16,14 @@ import java.util.stream.Collectors;
 
 @Controller
 public class HomeController {
+    private final TaskListDao dao;
 
-    record TaskItem(String id, String task, String deadline, boolean done) {
+    @Autowired
+    HomeController(TaskListDao dao){
+        this.dao = dao;
     }
 
+    record TaskItem(String id, String AI, String keyword) {}
     private List<TaskItem> taskItems = new ArrayList<>();
 
 
@@ -39,13 +44,13 @@ public class HomeController {
                 """.formatted(LocalDateTime.now());
     }
 
-    @GetMapping("/restadd")
-    String addItemd(@RequestParam("task") String task,
-                    @RequestParam("deadline") String deadline) {
+    @GetMapping("/add")
+    String addItemd(@RequestParam("AI") String AI,
+                    @RequestParam("keyword") String keyword) {
         String id = UUID.randomUUID().toString().substring(0, 8);
-        TaskItem item = new TaskItem(id, task, deadline, false);
-        taskItems.add(item);
-        return "タスクを追加しました。";
+        TaskItem item = new TaskItem(id, AI, keyword);
+        dao.add(item);
+        return "home";
     }
 
     @GetMapping("/restlist")
@@ -60,10 +65,11 @@ public class HomeController {
     public String test() {
         return "home";
     }
-
-    @GetMapping("/update")
-    String update( @RequestParam("memo") String memo,
-        TaskItem item = new TaskItem(id, task, deadline,memo, done);
-        this.dao.update(item);
-        return "redirect:/list";
 }
+//
+//    @GetMapping("/update")
+//    String update( @RequestParam("memo") String memo,
+//        TaskItem item = new TaskItem(AI, keyword, pagenumber,Createddate, Updatedate);
+//        this.dao.update(item);
+//        return "redirect:/list";
+//}
