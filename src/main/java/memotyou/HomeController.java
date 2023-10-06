@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
-@RestController
+//@RestController
 @Controller
 public class HomeController {
     private final TaskListDao dao;
@@ -75,8 +75,7 @@ public class HomeController {
 
         @GetMapping("/ChatGptRequestDAO")
         public ResponseEntity<String> chatGpt(@RequestParam("prompt") String prompt) {
-            try {
-                RestTemplate restTemplate = new RestTemplate();
+            try {RestTemplate restTemplate = new RestTemplate();
 
                 HttpHeaders headers = new HttpHeaders();
                 headers.set("Authorization", "Bearer " + apiKey);
