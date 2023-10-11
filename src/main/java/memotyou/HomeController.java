@@ -26,6 +26,8 @@ public class HomeController {
         this.dao = dao;
     }
 
+    private RestTemplate restTemplate;
+
     record TaskItem(String id, String AI, String keyword) {}
     private List<TaskItem> taskItems = new ArrayList<>();
 
