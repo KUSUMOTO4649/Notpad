@@ -1,11 +1,16 @@
 package memotyou;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.springframework.asm.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Service;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,25 +19,15 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import java.util.List;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.example.search.domains.Member;
-import com.example.search.mappers.MemberMapper;
 @Service
 public class TaskListDao {
     private final static String TABLE_NAME = "memotyou";
-    private final JdbcTemplate jdbcTemplate;
+      private final JdbcTemplate jdbcTemplate;
 
     @Autowired
-    TaskListDao(JdbcTemplate jdbcTemplate){this.jdbcTemplate = jdbcTemplate;}
+    TaskListDao(JdbcTemplate jdbcTemplate){
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     public int add(HomeController.TaskItem item){
         SqlParameterSource param = new BeanPropertySqlParameterSource(item);
@@ -40,63 +35,33 @@ public class TaskListDao {
                 .withTableName(TABLE_NAME);
         return insert.execute(param);
     }
-
-
-    @Controller
-    public class ChatGptRequestDAO {
-
-        private final ChatGptRequestDAO chatgptRequestdao;
-
-        @Autowired
-        public ChatGptRequestDAO(TaskListDao taskListdao, ChatGptRequestDAO chatgptRequestdao) {
-            this.chatgptRequestdao = chatgptRequestdao;
-            this.memberMapper = memberMapper;
-        }
-
-        public TaskListDao(TaskListDao taskListdao) {
-            this.taskListdao = taskListdao;
-        }
-
-        public ChatGptRequestDAO(ChatGptRequestDAO chatgptRequestdao) {
-            this.chatgptRequestdao = chatgptRequestdao;
-        }
-
-        @GetMapping("/api/members")
-        @ResponseBody
-        public List<Member> all() {
-            List<Member> members = memberMapper.all();
-            return members;
-        }
-
-        @GetMapping("/api/members/{words}")
-        @ResponseBody
-        public List<Member> find(@PathVariable String words) {
-            List<Member> members = memberMapper.findByNameLike(words);
-            return members;
-        }
-    }
-    public static void main(String[] args) throws IOException, InterruptedException, JSONException {
-
+    public static void main(String[] args) throws Exception{
+        String messages = "Content-Type: application/json";
         //リクエスト用のJsonオブジェクトのリストを作成
-        var messages = new ArrayList<JSONObject>();
-        messages.add(new JSONObject().put("role", "system").put("content", "筋肉トレーニング"));
-        messages.add(new JSONObject().put("role", "user").put("content", "ブログタイトルを考えてください"));
+//        var messages = new ArrayList<JSONObject>();
+        messages.add(new JSONObject().put("role","user").put("content",""));
+        messages.add(new JSONObject().put("role", "user").put("content",""));
         getOpenAIResponse(messages);
     }
 
-    private static String getOpenAIResponse(ArrayList<JSONObject> messages) throws IOException {
-        String apiKey = "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";
+    curl https://api.openai.com/v1/chat/completions  \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer ${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}";
+            -d '{"model": "gpt-3.5-turbo","messages": [{"role": "system", "content": ""}, {"role": "user", "content": ""}]}'
+
+    private static String getOpenAIResponse(ArrayList<JSONObject> messages) throws Exception {
+        String apiKey = "Authorization: Bearer ${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}";
         String model = "gpt-3.5-turbo";
 
-        try {
+//        try {
             System.out.println(messages);
             String response = generateText(apiKey, model, messages);
             System.out.println(response);
             return response;
-        } catch (IOException | JSONException e) {
-            e.printStackTrace();
-        }
-        return "";
+//        } catch (IOException | JSONException e) {
+//            e.printStackTrace();
+//        }
+//        return "";
     }
 
     public static String generateText(String apiKey, String model, ArrayList<JSONObject> messages) throws IOException, JSONException {
@@ -119,9 +84,9 @@ public class TaskListDao {
         String jsonInputString = requestBody.toString();
         connection.getOutputStream().write(jsonInputString.getBytes(StandardCharsets.UTF_8));
 
-        if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
-            throw new IOException("HTTP error code: " + connection.getResponseCode());
-        }
+//        if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) {
+//            throw new IOException("HTTP error code: " + connection.getResponseCode());
+//        }
 
         //受け取ったレスポンスを整形する。
         try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
