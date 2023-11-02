@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -35,21 +36,22 @@ public class TaskListDao {
                 .withTableName(TABLE_NAME);
         return insert.execute(param);
     }
-    public static void main(String[] args) throws Exception{
-        //リクエスト用のJsonオブジェクトのリストを作成
-        var messages = new ArrayList<JSONObject>();
-        messages.add(new JSONObject().put("role","user").put("content","今日誕生日の芸能人を教えてください。"));
-//        messages.add(new JSONObject().put("role", "user").put("content",""));
-        getOpenAIResponse(messages);
-    }
+//    @ResponseBody
+//    public static void main(String[] args) throws Exception{
+//        //リクエスト用のJsonオブジェクトのリストを作成
+//        var messages = new ArrayList<JSONObject>();
+//        messages.add(new JSONObject().put("role","user").put("content","明日の天気を教えてください。"));
+////        messages.add(new JSONObject().put("role", "user").put("content",""));
+//        getOpenAIResponse(messages);
+//    }
 
 //    curl https://api.openai.com/v1/chat/completions  \
 //            -H "Content-Type: application/json" \
 //            -H "Authorization: Bearer ${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}";
 //            -d '{"model": "gpt-3.5-turbo","messages": [{"role":"system", "content": ""}, {"role": "user", "content", ""}]}'
 
-    private static String getOpenAIResponse(ArrayList<JSONObject> messages) throws Exception {
-        String apiKey = "";
+    static String getOpenAIResponse(ArrayList<JSONObject> messages) throws Exception {
+        String apiKey = "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";
         String model = "gpt-3.5-turbo";
 
 //        try {

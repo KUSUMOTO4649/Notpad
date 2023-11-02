@@ -1,5 +1,6 @@
 package memotyou;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -16,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
+
+import static memotyou.TaskListDao.getOpenAIResponse;
 
 //@RestController
 @Controller
@@ -71,14 +74,19 @@ public class HomeController {
                 .collect(Collectors.joining(","));
         return result;
     }
-
+    @ResponseBody
     @GetMapping("/test")
-    public String test() {
+    public String test() throws Exception {
+        //リクエスト用のJsonオブジェクトのリストを作成
+        var messages = new ArrayList<JSONObject>();
+        messages.add(new JSONObject().put("role","user").put("content","明日の天気を教えてください。"));
+//        messages.add(new JSONObject().put("role", "user").put("content",""));
+        getOpenAIResponse(messages);
         return "home";
     }
 
 
-        private static final String apiKey = "";
+        private static final String apiKey = "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";
         private static final String chatGptEndpoint = "https://api.openai.com/v1/chat/completions";
 
         @GetMapping("/ChatGptRequestDAO")
