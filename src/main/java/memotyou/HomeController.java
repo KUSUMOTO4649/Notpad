@@ -16,11 +16,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
+
 //@RestController
 @Controller
 public class HomeController {
     private final TaskListDao dao;
-
+    @Autowired
     HomeController(TaskListDao dao){
         this.dao = dao;
     }
@@ -32,8 +33,8 @@ public class HomeController {
 
 
     @RequestMapping(value = "/memotyou")
-    @ResponseBody
-    String hello() {
+//    @ResponseBody
+    String home() {
         return """
                 <html>
                     <head>
@@ -47,10 +48,8 @@ public class HomeController {
                 </html>
                 """.formatted(LocalDateTime.now());
     }
-//    @Autowired
-//    HomeController(TaskListDao dao){
-//        this.dao = dao;
-//    }
+
+
     @RequestMapping("/time")
     String home(Model model){
         model.addAttribute("time",LocalDateTime.now());
@@ -79,8 +78,8 @@ public class HomeController {
     }
 
 
-        private static final String apiKey = "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";
-        private static final String chatGptEndpoint = "https://api.openai.com/v1/engines/davinci-codex/completions";
+        private static final String apiKey = "";
+        private static final String chatGptEndpoint = "https://api.openai.com/v1/chat/completions";
 
         @GetMapping("/ChatGptRequestDAO")
         public ResponseEntity<String> chatGpt(@RequestParam("prompt") String prompt) {
@@ -101,6 +100,7 @@ public class HomeController {
                 e.printStackTrace();
                 return new ResponseEntity<>("Error", HttpStatus.INTERNAL_SERVER_ERROR);
             }
+
         }
     }
 
