@@ -50,9 +50,9 @@ public class TaskListDao {
 //            -H "Authorization: Bearer ${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}";
 //            -d '{"model": "gpt-3.5-turbo","messages": [{"role":"system", "content": ""}, {"role": "user", "content", ""}]}'
 
-    static String getOpenAIResponse(ArrayList<JSONObject> messages) throws Exception {
-        String apiKey = "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";
-        String model = "gpt-3.5-turbo";
+    static String getBingAIResponse(ArrayList<JSONObject> messages) throws Exception {
+        String apiKey = "";
+        String model = "gpt-4.0";
 
 //        try {
             System.out.println(messages);
@@ -66,7 +66,7 @@ public class TaskListDao {
     }
 
     public static String generateText(String apiKey, String model, ArrayList<JSONObject> messages) throws IOException, JSONException {
-        String urlString = "https://api.openai.com/v1/chat/completions";
+        String urlString = "https://api.bing.microsoft.com/";
         URL url = new URL(urlString);
         // HTTPリクエストの作成
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();

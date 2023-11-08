@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import static memotyou.TaskListDao.getOpenAIResponse;
+import static memotyou.TaskListDao.getBingAIResponse;
 
 //@RestController
 @Controller
@@ -81,16 +81,16 @@ public class HomeController {
         var messages = new ArrayList<JSONObject>();
         messages.add(new JSONObject().put("role","user").put("content","明日の天気を教えてください。"));
 //        messages.add(new JSONObject().put("role", "user").put("content",""));
-        getOpenAIResponse(messages);
+        getBingAIResponse(messages);
         return "home";
     }
 
 
-        private static final String apiKey = "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";
-        private static final String chatGptEndpoint = "https://api.openai.com/v1/chat/completions";
+        private static final String apiKey = "";
+        private static final String bingEndpoint = "https://api.bing.microsoft.com/";
 
-        @GetMapping("/ChatGptRequestDAO")
-        public ResponseEntity<String> chatGpt(@RequestParam("prompt") String prompt) {
+        @GetMapping("/bingRequestDAO")
+        public ResponseEntity<String> bing(@RequestParam("prompt") String prompt) {
             try {RestTemplate restTemplate = new RestTemplate();
 
                 HttpHeaders headers = new HttpHeaders();
@@ -101,7 +101,7 @@ public class HomeController {
 
                 HttpEntity<String> request = new HttpEntity<>(requestBody, headers);
 
-                ResponseEntity<String> response = restTemplate.postForEntity(chatGptEndpoint, request, String.class);
+                ResponseEntity<String> response = restTemplate.postForEntity(bingEndpoint, request, String.class);
 
                 return new ResponseEntity<>(response.getBody(), HttpStatus.OK);
             } catch (Exception e) {
