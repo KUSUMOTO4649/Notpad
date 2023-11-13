@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ import static memotyou.TaskListDao.getBingAIResponse;
 //@RestController
 @Controller
 public class HomeController {
+    public static void main(String[] args){}
     private final TaskListDao dao;
     @Autowired
     HomeController(TaskListDao dao){
@@ -35,29 +37,29 @@ public class HomeController {
     private List<TaskItem> taskItems = new ArrayList<>();
 
 
-    @RequestMapping(value = "/memotyou")
-//    @ResponseBody
-    String home() {
-        return """
-                <html>
-                    <head>
-                    <title>メモ帳</title>
-                    </head>
-                    <body>
-                        <h1>メモ帳</h1>
-                        It works!<br>
-                        現在の時刻は%sです。
-                    </body>
-                </html>
-                """.formatted(LocalDateTime.now());
-    }
-
-
-    @RequestMapping("/time")
-    String home(Model model){
-        model.addAttribute("time",LocalDateTime.now());
-        return"home";
-    }
+//    @RequestMapping(value = "/memotyou")
+////    @ResponseBody
+//    String home() {
+//        return """
+//                <html>
+//                    <head>
+//                    <title>メモ帳</title>
+//                    </head>
+//                    <body>
+//                        <h1>メモ帳</h1>
+//                        It works!<br>
+//                        現在の時刻は%sです。
+//                    </body>
+//                </html>
+//                """.formatted(LocalDateTime.now());
+//    }
+//
+//
+//    @RequestMapping("/time")
+//    String home(@org.jetbrains.annotations.NotNull Model model){
+//        model.addAttribute("time",LocalDateTime.now());
+//        return"home";
+//    }
     @GetMapping("/add")
     String addItemd(@RequestParam("AI") String AI,
                     @RequestParam("keyword") String keyword) {
@@ -85,8 +87,11 @@ public class HomeController {
         return "home";
     }
 
+    private void getBingAIResponse(ArrayList<JSONObject> messages) {
+    }
 
-        private static final String apiKey = "";
+
+    private static final String apiKey = "f12d7e83be5343c485a238aeb0d4e12d";
         private static final String bingEndpoint = "https://api.bing.microsoft.com/";
 
         @GetMapping("/bingRequestDAO")

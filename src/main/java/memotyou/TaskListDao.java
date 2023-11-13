@@ -51,7 +51,7 @@ public class TaskListDao {
 //            -d '{"model": "gpt-3.5-turbo","messages": [{"role":"system", "content": ""}, {"role": "user", "content", ""}]}'
 
     static String getBingAIResponse(ArrayList<JSONObject> messages) throws Exception {
-        String apiKey = "";
+        String apiKey = "f12d7e83be5343c485a238aeb0d4e12d";
         String model = "gpt-4.0";
 
 //        try {
