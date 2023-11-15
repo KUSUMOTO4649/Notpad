@@ -36,20 +36,21 @@ public class TaskListDao {
         return insert.execute(param);
     }
     public static void main(String[] args) throws Exception{
+        String messages = "Content-Type: application/json";
         //リクエスト用のJsonオブジェクトのリストを作成
-        var messages = new ArrayList<JSONObject>();
-        messages.add(new JSONObject().put("role","user").put("content","今日誕生日の芸能人を教えてください。"));
-//        messages.add(new JSONObject().put("role", "user").put("content",""));
+//        var messages = new ArrayList<JSONObject>();
+        messages.add(new JSONObject().put("role","user").put("content",""));
+        messages.add(new JSONObject().put("role", "user").put("content",""));
         getOpenAIResponse(messages);
     }
 
-//    curl https://api.openai.com/v1/chat/completions  \
-//            -H "Content-Type: application/json" \
-//            -H "Authorization: Bearer ${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}";
-//            -d '{"model": "gpt-3.5-turbo","messages": [{"role":"system", "content": ""}, {"role": "user", "content", ""}]}'
+    curl https://api.openai.com/v1/chat/completions  \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer ${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}";
+            -d '{"model": "gpt-3.5-turbo","messages": [{"role": "system", "content": ""}, {"role": "user", "content": ""}]}'
 
     private static String getOpenAIResponse(ArrayList<JSONObject> messages) throws Exception {
-        String apiKey = "";
+        String apiKey = "Authorization: Bearer ${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}";
         String model = "gpt-3.5-turbo";
 
 //        try {
