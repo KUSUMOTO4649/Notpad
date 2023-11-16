@@ -1,9 +1,8 @@
-package memotyou;
+package Microsoft;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.springframework.asm.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -29,29 +28,29 @@ public class TaskListDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public int add(HomeController.TaskItem item){
+    public int add(BingWebSearch.TaskItem item){
         SqlParameterSource param = new BeanPropertySqlParameterSource(item);
         SimpleJdbcInsert insert = new SimpleJdbcInsert(this.jdbcTemplate)
                 .withTableName(TABLE_NAME);
         return insert.execute(param);
     }
-    public static void main(String[] args) throws Exception{
-        String messages = "Content-Type: application/json";
-        //リクエスト用のJsonオブジェクトのリストを作成
-//        var messages = new ArrayList<JSONObject>();
-        messages.add(new JSONObject().put("role","user").put("content",""));
-        messages.add(new JSONObject().put("role", "user").put("content",""));
-        getOpenAIResponse(messages);
-    }
+//    public static void main(String[] args) throws Exception{
+//        String messages = "Content-Type: application/json";
+//        //リクエスト用のJsonオブジェクトのリストを作成
+////        var messages = new ArrayList<JSONObject>();
+//        messages.wait(new JSONObject().put("role","user").put("content","javaについて教えて。"));
+////        messages.wait(new JSONObject().put("role", "user").put("content",""));
+//        getBingAIResponse(messages);
+//    }
 
-    curl https://api.openai.com/v1/chat/completions  \
-            -H "Content-Type: application/json" \
-            -H "Authorization: Bearer ${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}";
-            -d '{"model": "gpt-3.5-turbo","messages": [{"role": "system", "content": ""}, {"role": "user", "content": ""}]}'
+//    curl https://api.openai.com/v1/chat/completions  \
+//            -H "Content-Type: application/json" \
+//            -H "Authorization: Bearer ${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}";
+//            -d '{"model": "gpt-3.5-turbo","messages": [{"role": "system", "content": ""}, {"role": "user", "content": ""}]}'
 
-    private static String getOpenAIResponse(ArrayList<JSONObject> messages) throws Exception {
-        String apiKey = "Authorization: Bearer ${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}";
-        String model = "gpt-3.5-turbo";
+    private static String getBingAIResponse(ArrayList<JSONObject> messages) throws Exception {
+        String apiKey = "Authorization: Bearer ${sk-iwf12d7e83be5343c485a238aeb0d4e12d}";
+        String model = "gpt-4.0";
 
 //        try {
             System.out.println(messages);
@@ -65,7 +64,7 @@ public class TaskListDao {
     }
 
     public static String generateText(String apiKey, String model, ArrayList<JSONObject> messages) throws IOException, JSONException {
-        String urlString = "https://api.openai.com/v1/chat/completions";
+        String urlString = "https://api.bing.microsoft.com/";
         URL url = new URL(urlString);
         // HTTPリクエストの作成
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
