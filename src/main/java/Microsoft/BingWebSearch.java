@@ -73,12 +73,12 @@ public class BingWebSearch {
     @GetMapping("/test")
     public String test() throws Exception {
         //リクエスト用のJsonオブジェクトのリストを作成
-        var messages = new ArrayList<JSONObject>();
-        messages.add(new JSONObject().put("role","user").put("content","明日の天気を教えてください。"));
+            var messages = new ArrayList<JSONObject>();
+            messages.add(new JSONObject().put("role", "user").put("content", "明日の天気を教えてください。"));
 //        messages.add(new JSONObject().put("role", "user").put("content",""));
-        getBingAIResponse(messages);
-        return "home";
-    }
+            getBingAIResponse(messages);
+            return "home";
+        }
 
     private void getBingAIResponse(ArrayList<JSONObject> messages) {
     }

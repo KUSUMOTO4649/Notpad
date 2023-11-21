@@ -63,7 +63,7 @@ public class TaskListDao {
 //        return "";
     }
 
-    public static String generateText(String apiKey, String model, ArrayList<JSONObject> messages) throws IOException, JSONException {
+    public static <JsonArray> String generateText(String apiKey, String model, ArrayList<JSONObject> messages) throws IOException, JSONException {
         String urlString = "https://api.bing.microsoft.com/";
         URL url = new URL(urlString);
         // HTTPリクエストの作成
@@ -75,6 +75,7 @@ public class TaskListDao {
         connection.setDoOutput(true);
 
         //JSONArrayでリクエストする。
+//        JsonArray value = Json.createArrayBuilder();
         JSONArray messagesJsonArray = new JSONArray(messages);
         JSONObject requestBody = new JSONObject()
                 .put("model",model)
